@@ -10,7 +10,7 @@
 </script>
 
 <main transition:fade={{ delay: 0, duration: 250 }} class="absolute dark z-20 top-0 left-0 flex items-center justify-center h-screen w-screen backdrop-blur-md bg-black/50">
-    <div transition:fly={{y: 20, duration: 150}} class="fade-up min-w-[32rem] p-6 text-white max-w-[32rem] bg-zinc-950 border border-zinc-800 rounded-lg">
+    <div transition:fly={{y: 20, duration: 150}} class="fade-up w-[95%] lg:min-w-[32rem] p-6 text-white max-w-[32rem] bg-zinc-950 border border-zinc-800 rounded-lg">
         <header class="font-semibold text-lg flex items-start justify-between flex-col">
             <p class="font-mono text-xs text-zinc-500 mb-2">
                 SOLVED RIDDLE

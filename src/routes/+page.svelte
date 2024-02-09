@@ -149,7 +149,7 @@
                     RiddleMeThis
                 </h1>
                 <p class="text-sm mt-1">
-                    A random riddle designed to keep you sharp
+                    A random riddle game designed to keep you sharp
                 </p>
             </div>
 
