@@ -1,11 +1,11 @@
 @font-face {
     font-family: 'Geist';
-    src: url('src/GeistVariableVF.ttf') format('truetype-variations');
+    src: url('fonts/GeistVariableVF.ttf') format('truetype-variations');
 }
 
 @font-face {
     font-family: "Geist Mono";
-    src: url('src/GeistMonoVariableVF.ttf') format('truetype-variations');
+    src: url('fonts/GeistMonoVariableVF.ttf') format('truetype-variations');
 }
 
 @tailwind base;
