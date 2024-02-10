@@ -181,7 +181,7 @@
                 {totalGuessesAmount}/6 GUESSES
             </span>
         </p>
-        <p class='fade-up mt-1 text-lg'>
+        <p class='fade-up mt-1 text-lg '>
             {#if currentRiddleData.content !== undefined}
                 {currentRiddleData.content}
             {:else}

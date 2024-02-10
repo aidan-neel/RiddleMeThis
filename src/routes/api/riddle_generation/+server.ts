@@ -14,13 +14,14 @@ function generateRandomString() {
 }
 
 export async function GET({  }) {
-    const prompt = `Generate a riddle about anything, make it difficult and clever. Make it unique each time. Don't make it super long. Only send the text, no images or links, and nothing but just the riddle question. Then, add a - at the end and then the answer(s), max 3 answers seperated by a comma with no spaces between and no other unnneceessary strings. ${generateRandomString()}`;
+    const prompt = `Generate a riddle about ANYTHING, pick a random topic, whether it be sports, electronics, food, hygiene, health, or anything. make it difficult and clever. make it feel like a classic riddle even if you made it up. Make it unique each time. Don't make it super long. Only send the text, no images or links, and nothing but just the riddle question. Then, add a - at the end and then the answer(s), max 3 answers seperated by a comma with no spaces between and no other unnneceessary strings. ${generateRandomString()}`;
     const completions = await openai.chat.completions.create({
         messages: [{ role: "system", content: prompt }],
         model: "gpt-3.5-turbo",
-        temperature: 1,
+        temperature: 1.3,
     })
     const riddle = completions.choices[0].message.content;
+    console.log(riddle);
     const answers = riddle?.split('-')[1].split(',');
     const riddleMessage = riddle?.split('-')[0];
     const data = {
