@@ -1,6 +1,7 @@
 import { SECRET_CHATGPT_API_KEY, SECRET_WEBHOOK_URL, SECRET_ASSISTANT_ID } from '$env/static/private';
 import OpenAI from "openai";
 import fs from 'fs';
+import riddles from '$lib/data/riddles.json'
 
 const openai = new OpenAI({ apiKey: SECRET_CHATGPT_API_KEY });
 const webhook_url = SECRET_WEBHOOK_URL;
@@ -38,38 +39,35 @@ async function sendWebhookEmbedToDiscord(riddle, answers, riddleHint) {
 }
 
 export async function GET({ url }) {
-    const file_url = "/riddles.json"; // path to the riddle file
-    let file
+    if(riddles) {
+        // parse the data
+        const random_number = Math.floor(Math.random() * Object.keys(riddles).length);
+        const riddle = riddles[random_number];
+        const riddleData = riddle[0]
 
-    // read the file
-    let data
-    if (fs.existsSync(file_url)) {
-        data = fs.readFileSync(file_url, 'utf8');
+        const returnedRiddleObject = {
+            "riddle": riddleData.question,
+            "answer": riddleData.answer,
+            "hint": undefined,
+        }
+
+        sendWebhookEmbedToDiscord(riddleData.question, riddleData.answer);
+
+        return new Response(JSON.stringify(returnedRiddleObject), {
+            status: 200,
+            headers: {
+                "content-type": "application/json; charset=UTF-8",
+            },
+        });
+    } else {
+        return new Response(JSON.stringify({ error: 'Riddle generation failed' }), {
+            status: 500,
+            headers: {
+                "content-type": "application/json; charset=UTF-8",
+            },
+        }) as Response;
+    
     }
-    else {
-        data = "";
-    }
-
-    // parse the data
-    const riddles = JSON.parse(data);
-    const random_number = Math.floor(Math.random() * Object.keys(riddles).length);
-    const riddle = riddles[random_number];
-    const riddleData = riddle[0]
-
-    const returnedRiddleObject = {
-        "riddle": riddleData.question,
-        "answer": riddleData.answer,
-        "hint": undefined,
-    }
-
-    sendWebhookEmbedToDiscord(riddleData.question, riddleData.answer);
-
-    return new Response(JSON.stringify(returnedRiddleObject), {
-        status: 200,
-        headers: {
-            "content-type": "application/json; charset=UTF-8",
-        },
-    });
 }
 
 /*
