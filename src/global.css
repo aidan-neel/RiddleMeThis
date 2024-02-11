@@ -12,6 +12,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.test {
+    font-family: 'Geist', sans-serif;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
