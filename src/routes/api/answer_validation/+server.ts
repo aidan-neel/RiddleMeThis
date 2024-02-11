@@ -22,7 +22,7 @@ export async function GET({ url }) {
     const fuseSearchResults = fuse.search(answer);
 
     // Check if a close match was found
-    if (fuseSearchResults.length > 0 && fuseSearchResults[0].score <= 0.1) {
+    if (fuseSearchResults.length > 0 && fuseSearchResults[0].score <= 0.3) {
         // A match with a high enough score was found, return correct: true
         return new Response(JSON.stringify({ correct: true }), {
             status: 200,
@@ -31,15 +31,17 @@ export async function GET({ url }) {
             },
         });
     } else {
+        console.log('No close match found, proceeding with ChatGPT validation');
         // Proceed with ChatGPT validation if no close match was found
-        const prompt = `Riddle: ${riddle}\nAnswer: ${answer}\nIs this answer similar enough to the answers provided below? It has to be 95% exact. Reply only with YES or NO. The riddle answers are: ${riddleAnswers.join(", ")}`;
+        const prompt = `Riddle: ${riddle}\nAnswer: ${answer}\nIs this answer similar enough to the answers provided below? It has to be 90% exact. Reply only with YES or NO. Ignore typos. The riddle answers are: ${riddleAnswers.join(", ")}`;
         const completions = await openai.chat.completions.create({
             messages: [{ role: "system", content: prompt }],
             model: "gpt-3.5-turbo",
-            temperature: 0.3,
+            temperature: 0.1,
         });
 
         const validation = completions.choices[0].message.content;
+        console.log(validation);
         if (validation?.toLowerCase() === 'yes') {
             return new Response(JSON.stringify({ correct: true }), {
                 status: 200,
