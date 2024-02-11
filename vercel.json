@@ -1,0 +1,7 @@
+{
+    "functions": {
+        "api/**": {
+            "includeFiles": "src/lib/server/riddles.json"
+        }
+    }
+}
