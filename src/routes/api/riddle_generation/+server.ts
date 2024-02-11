@@ -38,7 +38,7 @@ async function sendWebhookEmbedToDiscord(riddle, answers, riddleHint) {
 }
 
 export async function GET({ url }) {
-    const file_url = "src/lib/server/riddles.json"; // path to the riddle file
+    const file_url = "/riddles.json"; // path to the riddle file
     let file
 
     // read the file
