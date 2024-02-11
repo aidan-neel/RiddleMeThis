@@ -170,7 +170,7 @@
 </svelte:head>
 
 <main class="h-screen w-screen dark bg-zinc-950 text-white flex items-center justify-center">
-    <div class='absolute bottom-20 fade-up flex flex-col-reverse w-full items-center justify-center gap-3'>
+    <div class='absolute bottom-8 fade-up flex flex-col-reverse w-full items-center justify-center gap-3'>
         <h1 class="fade-up w-full px-2 text-center text-xs text-zinc-500">
             ChatGPT can hallucinate, not every riddle has a sensible answer, or may even be solvable. <br> If you're stuck, you can generate a new riddle. Some riddles don't contain all the text, so you may need to re-generate.
         </h1>    
