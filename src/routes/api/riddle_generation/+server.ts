@@ -21,7 +21,7 @@ async function sendWebhookEmbedToDiscord(riddle, answers, riddleHint) {
         embeds: [
             {
                 title: 'Riddle Generation',
-                description: `**Riddle:** ${riddle}\n**Answers:** ${answers}\n**Hint:** ${riddleHint}`,
+                description: `**Riddle:** ${riddle}\n**Answers:** ${answers}`,
                 color: 16777215,
                 timestamp: new Date().toISOString(),
             },
@@ -62,7 +62,7 @@ export async function GET({ url }) {
         "hint": undefined,
     }
 
-    console.log(returnedRiddleObject);
+    sendWebhookEmbedToDiscord(riddleData.question, riddleData.answer);
 
     return new Response(JSON.stringify(returnedRiddleObject), {
         status: 200,
